@@ -1,0 +1,32 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Chain lube {% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+    <div class="row">
+       <div class="col-sm-2">
+           <div class="list-group">
+             <a href="{% url 'chainlube' %}" class="list-group-item list-group-item-action" aria-current="true">All Accessories</a>
+             <a href="{% url 'chainlubedata' 'Motul' %}" class="list-group-item list-group-item-action" aria-current="true">Motul</a>
+             <a href="{% url 'chainlubedata' 'Waxpol' %}" class="list-group-item list-group-item-action" aria-current="true">Waxpol</a>
+             <a href="{% url 'chainlubedata' 'WD-40' %}" class="list-group-item list-group-item-action" aria-current="true">WD-40</a>   
+            </div>
+      </div>
+    </div>
+        <div class="col-sm-40">
+            <div class ="row">
+                {% for product in chainlubeandcleaner %}
+                    <div class="col-sm-4 text-center mb-4"> 
+                        <a href="{% url 'product-detail' product.id %}" class="btn">
+                         <div class = "item"></div>
+                         <img src="{{product.product_image.url}}" alt="" height="250" class="">
+                         <div class="fw-bold">{{product.title}}</div>
+                         <div class="fw-bold">Rs. {{product.discounted_price}}</div>
+                         <small class="fw-light text-decoration-line-through">{{product.selling_price}}</small>
+                        </a>
+                    </div>
+                {% endfor %}    
+            </div>
+        </div>
+</div>
+{% endblock main-content %}

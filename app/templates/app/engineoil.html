@@ -1,0 +1,32 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}EngineOil{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+    <div class="row">
+       <div class="col-sm-2">
+           <div class="list-group">
+             <a href="{% url 'engineoil' %}" class="list-group-item list-group-item-action" aria-current="true">All Engineoil</a>
+             <a href="{% url 'engineoildata' 'Castrol' %}" class="list-group-item list-group-item-action" aria-current="true">Castrol</a>
+             <a href="{% url 'engineoildata' 'Motul' %}" class="list-group-item list-group-item-action" aria-current="true">Motul</a>
+             <a href="{% url 'engineoildata' 'BAJAJ' %}" class="list-group-item list-group-item-action" aria-current="true">BAJAJ</a>   
+            </div>
+      </div>
+    </div>
+        <div class="col-sm-40">
+            <div class ="row">
+                {% for product in Engineoil %}
+                    <div class="col-sm-4 text-center mb-4"> 
+                        <a href="{% url 'product-detail' product.id %}" class="btn">
+                         <div class = "item"></div>
+                         <img src="{{product.product_image.url}}" alt="" height="250" class="">
+                         <div class="fw-bold">{{product.title}}</div>
+                         <div class="fw-bold">Rs. {{product.discounted_price}}</div>
+                         <small class="fw-light text-decoration-line-through">{{product.selling_price}}</small>
+                        </a>
+                    </div>
+                {% endfor %}    
+            </div>
+        </div>
+</div>
+{% endblock main-content %}
